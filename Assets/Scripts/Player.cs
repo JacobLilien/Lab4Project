@@ -28,7 +28,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal") * speed;
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
+        if (horizontalMovement == 0)
+        {
+            animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 10);
+        }
 
         if (horizontalMovement > 0 && !facingRight)
         {
@@ -44,7 +52,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontalMovement * Time.fixedDeltaTime, rb.velocity.y);
+        rb.velocity = new Vector2(7 * horizontalMovement * Time.fixedDeltaTime, rb.velocity.y);
     }
 
     private void Flip()
