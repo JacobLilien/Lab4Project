@@ -6,7 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
 
     public Transform target; // Reference to the sprite's transform
-    public float smoothSpeed = 0.9f; // Adjust the smoothness of camera movement
+    public float smoothSpeed = 0.5f; // Adjust the smoothness of camera movement
 
     void LateUpdate()
     {
