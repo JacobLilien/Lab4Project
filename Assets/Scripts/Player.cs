@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private bool facingRight = true;
     private AudioSource soundeffect;
     public UnityEvent myEvents;
-
+    private bool hitGrass;
 
     Rigidbody2D rb;
     public Animator animator;
@@ -60,6 +60,10 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(7 * horizontalMovement * Time.fixedDeltaTime, rb.velocity.y);
+        if (hitGrass){
+        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 8);
+        }
+        hitGrass = false;
     }
 
     private void Flip()
@@ -70,7 +74,7 @@ public class Player : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
-
+    
     void OnCollisionEnter2D(Collision2D col)
     {
         GameObject collidedObject = col.gameObject;
@@ -81,7 +85,12 @@ public class Player : MonoBehaviour
         
         if (collidedObject.name.Contains("Grass"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 8);
+            hitGrass = true;
+        }
+        else if (collidedObject.name.Contains("Rain"))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 10);
+            Destroy(collidedObject);
         }
         else if (collidedObject.name.Contains("Background"))
         {
@@ -90,7 +99,6 @@ public class Player : MonoBehaviour
         else
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 10);
-            Destroy(collidedObject);
             soundeffect.Play();
         }       
 
