@@ -26,6 +26,11 @@ public class SceneChange : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void Info()
+    {
+        SceneManager.LoadScene(4);
+    }
+
 
 
 }
