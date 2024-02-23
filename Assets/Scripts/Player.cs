@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+
 
 public class Player : MonoBehaviour
 {
@@ -103,6 +105,10 @@ public class Player : MonoBehaviour
         {
             hitCloud = true;
             Destroy(collidedObject);
+        }
+        else if (collidedObject.name.Contains("Golden"))
+        {
+            SceneManager.LoadScene(3);
         }
         else if (collidedObject.name.Contains("Background"))
         {
