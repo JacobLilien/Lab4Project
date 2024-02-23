@@ -104,6 +104,7 @@ public class Player : MonoBehaviour
         else if (collidedObject.name.Contains("Rain"))
         {
             hitCloud = true;
+            soundeffect.Play();
             Destroy(collidedObject);
         }
         else if (collidedObject.name.Contains("Golden"))
